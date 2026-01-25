@@ -14,3 +14,8 @@ services:
     command: bash
     stdin_open: true
     tty: true
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test

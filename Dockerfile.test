@@ -1,0 +1,19 @@
+FROM gcc:13
+
+WORKDIR /app
+
+# Install required dependencies for Crow
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cmake \
+    libboost-system-dev \
+    libboost-date-time-dev \
+    libboost-filesystem-dev \
+    libasio-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY CMakeLists.txt main.cpp routes.h ./
+COPY tests/ tests/
+
+RUN cmake -B build -DBUILD_TESTS=ON && cmake --build build
+
+CMD ["ctest", "--test-dir", "build", "--output-on-failure"]

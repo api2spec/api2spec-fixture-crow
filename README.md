@@ -17,6 +17,12 @@ docker compose up app
 
 The server will be available at http://localhost:8080
 
+### Run tests
+
+```bash
+docker compose run --rm test
+```
+
 ### Interactive development container
 
 ```bash
@@ -26,7 +32,7 @@ docker compose run --rm dev
 Inside the container, build and run:
 
 ```bash
-apt-get update && apt-get install -y cmake libboost-all-dev libasio-dev
+apt-get update && apt-get install -y cmake libboost-system-dev libboost-date-time-dev libboost-filesystem-dev libasio-dev
 cmake -B build
 cmake --build build
 ./build/server
